@@ -59,16 +59,23 @@ class binaryTreeOps:
             return 1
         return (self.roottoleafsumpath(root.left, sumpath) or self.roottoleafsumpath(root.right, sumpath))
 
-    def roottoleafpath(self,root,array):
+    def printPaths(self,root):
+        arr = []
+        self.roottoleafpath(root,arr,0)
+
+    def roottoleafpath(self,root,arr,pathlen):
         if root is None:
             return 0
-        #self.array_p.append(root.data)
-        array.append(root.data)
+        arr.insert(pathlen,root.data)
+        pathlen = pathlen + 1
         if  (root.left is None and root.right is None):
-            print(array)
-            #self.array_p=[]
-        self.roottoleafpath(root.left,array)
-        self.roottoleafpath(root.right,array)
+            self.printPathsLine(arr,pathlen)
+        self.roottoleafpath(root.left,arr,pathlen)
+        self.roottoleafpath(root.right,arr,pathlen)
+    def printPathsLine(self,arr,pathlen):
+        for index in range(0,pathlen):
+            print arr[index]
+        print "\n"
 
 if __name__=='__main__':
     root = node(5)
@@ -78,4 +85,4 @@ if __name__=='__main__':
     root.right.left = node(3)
     arr = []
     obj = binaryTreeOps()
-    print obj.roottoleafpath(root,arr)
+    obj.printPaths(root)
