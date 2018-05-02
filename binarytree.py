@@ -9,7 +9,7 @@ class node :
         self.left = None
 
 class binaryTreeOps:
-
+    array_p = []
     def ischecksum(self,root):
         left_data = 0
         right_data = 0
@@ -32,7 +32,7 @@ class binaryTreeOps:
         left_max = self.max_value(root.left)
         if right_max > max:
             max = right_max
-        elif left_max > max:
+        if left_max > max:
             max = left_max
         return max
 
@@ -44,17 +44,38 @@ class binaryTreeOps:
         left_min = self.min_value(root.left)
         if right_min < min:
             min = right_min
-        if left_min < min:
+        elif left_min < min:
             min = left_min
         return min
-    def isbst(self,root):
 
+    def roottoleafsumpath(self,root,sum):
+        if root is None:
+            return 0
+        sumpath = sum - root.data
+        self.array_p.append(root.data)
+        if sumpath == 0 and (root.left is None and root.right is None):
+            print(self.array_p)
+            self.array_p=[]
+            return 1
+        return (self.roottoleafsumpath(root.left, sumpath) or self.roottoleafsumpath(root.right, sumpath))
+
+    def roottoleafpath(self,root,array):
+        if root is None:
+            return 0
+        #self.array_p.append(root.data)
+        array.append(root.data)
+        if  (root.left is None and root.right is None):
+            print(array)
+            #self.array_p=[]
+        self.roottoleafpath(root.left,array)
+        self.roottoleafpath(root.right,array)
 
 if __name__=='__main__':
-    root = node(15)
+    root = node(5)
     root.right = node(7)
     root.left = node(8)
-    root.right.left = node(7)
+    root.left.left = node(9)
+    root.right.left = node(3)
+    arr = []
     obj = binaryTreeOps()
-    #print (root.data)
-    print (obj.min_value(root))
+    print obj.roottoleafpath(root,arr)
