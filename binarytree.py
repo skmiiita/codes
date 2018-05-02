@@ -85,7 +85,6 @@ class binaryTreeOps:
             for index in range(0, pathlen):
                 print self.array_p[index]
             print "\n"
-            #self.printPathsLine(self.array_p,pathlen)
         self.printroottoleafpaths_m(root.left, pathlen)
         self.printroottoleafpaths_m(root.right, pathlen)
 if __name__=='__main__':

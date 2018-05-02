@@ -36,22 +36,23 @@ class LinkedList:
     def checkpallindromicstring(self):
         list_orig = self.head
         temp = list_orig
-        middle = self.getMiddle()
-        self.head = middle
+        #middle = self.getMiddle()
+        #self.head = middle
         self.reverse_list()
         #print list_orig.data
-        current  = middle
+        current  = self.head
         status = 0
-        print temp.data, current.next.data
-        if temp != middle and current.next is not None:
+        #print temp.data, current.next.data
+        while temp.next is not None:
 
-            if temp.data == current.next.data:
+            if temp.data == current.data:
                 status = 1
             else:
                 return 0
             temp = temp.next
             current = current.next
         return status
+
     def getMiddle(self):
         if self.head is None:
             return
