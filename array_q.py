@@ -21,6 +21,29 @@ class array_ops:
 
         return 1
 
+    def countrotationcount(self,low,high):
+
+        # {15, 18, 2, 3, 6, 12}
+        # {7, 9, 11, 12, 5}
+        # {1,2,3,4,5}
+        # {2,3,4,5,1}
+        mid = low + (high-low)/2
+        if (high-low)==0 :
+            return 0
+        if (high-low) == 1:
+            if self.array[high] < self.array[low]:
+                return 1
+            else:
+                return 0
+
+        if self.array[mid] < self.array[mid+1] and self.array[mid] < self.array[mid-1]:
+            return mid
+
+        elif self.array[mid] < self.array[mid+1] and self.array[mid] > self.array[0]:
+            self.countrotationcount(mid+1,high)
+        elif self.array[mid] < self.array[mid+1] and self.array[mid] < self.array[mid-1]:
+
+
 
 if __name__ == '__main__':
     arr = [4,1,2,7,8,9,6]
