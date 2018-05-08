@@ -39,9 +39,10 @@ class array_ops:
         if self.array[mid] < self.array[mid+1] and self.array[mid] < self.array[mid-1]:
             return mid
 
-        elif self.array[mid] < self.array[mid+1] and self.array[mid] > self.array[0]:
+        elif self.array[mid] < self.array[mid+1] and self.array[mid] > self.array[0] and self.array[mid] < self.array[mid-1]:
             self.countrotationcount(mid+1,high)
         elif self.array[mid] < self.array[mid+1] and self.array[mid] < self.array[mid-1]:
+            pass
 
 
 

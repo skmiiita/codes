@@ -16,21 +16,12 @@ def search(arr,low,high,n) :
                 high = mid-1
             else:
                 low = mid+1
+        return -1
     except Exception:
         print(traceback.format_exc())
-        return 0
+        return -1
 
-def searchsortedrotatedarray(arr,low,high,n):
-        try:
-                while(left<=right):
-                    mid = low + int((high - low) / 2)
-                    if arr[mid] == n:
-                            return mid
-                    elif arr[mid] > n and arr[low] > n:
-                        low = mid+1
-                    elif arr[mid] > n and arr[low] < n:
-                        low = mid+1
-                    elif arr[mid]<n:
+
                         
 if __name__ == "__main__":
         a = random.sample(range(1, 10000001), 10000000)
