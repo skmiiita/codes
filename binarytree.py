@@ -1,3 +1,5 @@
+import numpy as np
+
 class node :
     def __init__(self,data):
         """
@@ -87,6 +89,51 @@ class binaryTreeOps:
             print "\n"
         self.printroottoleafpaths_m(root.left, pathlen)
         self.printroottoleafpaths_m(root.right, pathlen)
+
+    def treeHeight(self,root):
+        if root is None:
+            return 0
+        lh = 1 + self.treeHeight(root.left)
+        rh = 1+ self.treeHeight(root.right)
+
+        return max(lh,rh)
+
+    def treeDiameter(self,root):
+        if root is None:
+            return 0
+        lh = self.treeHeight(root.left)
+        rh = self.treeHeight(root.right)
+        ld = self.treeDiameter(root.left)
+        rd = self.treeDiameter(root.right)
+
+        return max(1+lh+rh ,max(self.treeDiameter(root.left), self.treeDiameter(root.right)))
+
+    def treeDiameter_n(self,root,height):
+        if root is None:
+            height = 0
+            return 0
+
+        ld  = 1 + self.treeDiameter_n(root.left, height+1)
+        rd = 1 + self.treeDiameter_n(root.right,height+1)
+
+        return max(height,max(ld,rd))
+
+    def findAncestor(self,root,n,M):
+        if root is None:
+            return 0
+        if root.data  == n:
+            return True
+        if self.findAncestor(root.left,n,M) or self.findAncestor(root.right,n,M):
+            print root.data
+            M[root.data][root.data]=1
+            #print M
+            return True
+
+        return False
+
+
+
+
 if __name__=='__main__':
     root = node(5)
     root.right = node(7)
@@ -97,4 +144,9 @@ if __name__=='__main__':
     root.right.left = node(3)
     arr = []
     obj = binaryTreeOps()
-    obj.printroottoleafpaths_m(root,0)
+    #obj.printroottoleafpaths_m(root,0)
+    height = 0
+    #print obj.treeDiameter_n(root,height)
+    M = [[0] * 12 for i in range(12)]
+    obj.findAncestor(root,10,M)
+    print(np.matrix(M))
