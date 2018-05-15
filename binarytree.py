@@ -1,5 +1,6 @@
 import numpy as np
-
+import queue_datastructure
+from Queue import *
 class node :
     def __init__(self,data):
         """
@@ -131,6 +132,29 @@ class binaryTreeOps:
 
         return False
 
+    def levelorderTraversal(self,root,Q,q):
+        if root is None:
+            return
+
+        if Q.empty():
+            Q.put(root)
+            q.put(root.data)
+        print "Q : ",list(q.queue)
+        node = Q.get()
+        print node.data
+        if root.left:
+            Q.put(root.left)
+            q.put(root.left.data)
+        if root.right:
+            Q.put(root.right)
+            q.put(root.right.data)
+
+        return not (not self.levelorderTraversal(root.left, Q, q) and not self.levelorderTraversal(root.right, Q, q))
+
+
+
+
+        
 
 
 
@@ -139,14 +163,19 @@ if __name__=='__main__':
     root.right = node(7)
     root.left = node(8)
     root.left.left = node(9)
+    root.right.left = node(3)
+    root.right.right = node(12)
     root.left.left.right = node(10)
     root.left.left.left = node(11)
-    root.right.left = node(3)
+
     arr = []
     obj = binaryTreeOps()
     #obj.printroottoleafpaths_m(root,0)
     height = 0
     #print obj.treeDiameter_n(root,height)
     M = [[0] * 12 for i in range(12)]
-    obj.findAncestor(root,10,M)
-    print(np.matrix(M))
+    #obj.findAncestor(root,10,M)
+    #print(np.matrix(M))
+    Q = Queue()
+    q = Queue()
+    obj.levelorderTraversal(root,Q,q)
