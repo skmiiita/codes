@@ -45,9 +45,49 @@ class array_ops:
             pass
 
 
+    def sort10array(self,arr):
+        i = 0
+        while(arr[i]==0):
+            i+=1
+        j = len(arr)-1
+
+        while(arr[j]==1):
+            j-=1
+        print i,j
+        while(i<j):
+            if arr[i] == 1:
+                arr[i],arr[j] = arr[j],arr[i]
+                i+=1
+                j-=1
+
+            elif arr[i]==0:
+                i+=1
+            elif arr[j] == 1:
+                j-=1
+        return arr
+        '''
+        i=0
+        j=len(arr)-1
+        b_arr = [0]*len(arr)
+        for index in range(0,len(arr)):
+            if arr[index]==0:
+                b_arr
+                i+=1
+            elif arr[index] ==1:
+                b_arr[j] = 1
+                j-=1
+        return b_arr
+
+        '''
+
+
+
 
 if __name__ == '__main__':
     arr = [4,1,2,7,8,9,6]
     obj = array_ops(arr)
-    print (obj.triplet_sum(18))
+    #print (obj.triplet_sum(18))
+    arr = [1,0,1,0,1,1,0,0,1,1,1]
+    print obj.sort10array(arr)
+
 

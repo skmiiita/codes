@@ -139,24 +139,105 @@ class binaryTreeOps:
         if Q.empty():
             Q.put(root)
             q.put(root.data)
-        print "Q : ",list(q.queue)
-        node = Q.get()
-        print node.data
-        if root.left:
-            Q.put(root.left)
-            q.put(root.left.data)
-        if root.right:
-            Q.put(root.right)
-            q.put(root.right.data)
 
-        return not (not self.levelorderTraversal(root.left, Q, q) and not self.levelorderTraversal(root.right, Q, q))
-
+        while Q.empty() is not None:
+            node = Q.get()
+            print node.data
+            if node.left:
+                Q.put(node.left)
+                q.put(node.left.data)
+            if node.right:
+                Q.put(node.right)
+                q.put(node.right.data)
 
 
+    def printRightView(self,root,Q):
+        if root is None:
+            return
+        if Q.empty():
+            Q.put(root)
 
-        
+        while Q.empty() is not None:
+            node = Q.get()
+            print node.data
 
+            if node.right:
+                Q.put(node.right)
 
+    def printsidenodes(self, root,Q,L):
+        if root is None:
+            return
+
+        if len(L)==0:
+            L.append(root.left)
+        while len(L) is not 0:
+            node = L.pop()
+            print node.data
+
+            if node.left:
+                L.append(node.left)
+        if Q.empty():
+            Q.put(root)
+
+        while Q.empty() is not None:
+            node = Q.get()
+            print node.data
+
+            if node.right:
+                Q.put(node.right)
+
+    def zigzagtraversal(self,root,Q,q):
+        if root is None:
+            return
+
+        if Q.empty():
+            Q.put(root)
+            q.put(root.data)
+        level = 1
+        while Q.empty() is not None:
+
+            node = Q.get()
+            print node.data
+            if level%2==1:
+                if node.left:
+                    Q.put(node.left)
+                    q.put(node.left.data)
+                if node.right:
+                    Q.put(node.right)
+                    q.put(node.right.data)
+
+                level = level + 1
+
+            elif level%2==0:
+                if node.left:
+                    Q.put(node.left)
+                    q.put(node.left.data)
+
+                if node.right:
+                    Q.put(node.right)
+                    q.put(node.right.data)
+                level = level + 1
+
+    def zigzagtraversal_stack(self, root, S):
+        if root is None:
+            return
+        if len(S) is 0:
+            S.append(root)
+        level = 1
+        while len(S) is not 0:
+            node = S.pop()
+            print node.data
+            level +=1
+            if level%2==0:
+                if node.left:
+                    S.append(node.left)
+                if node.right:
+                    S.append(node.right)
+            elif level %2 ==1:
+                if node.right:
+                    S.append(node.right)
+                if node.left:
+                    S.append(node.left)
 
 if __name__=='__main__':
     root = node(5)
@@ -178,4 +259,9 @@ if __name__=='__main__':
     #print(np.matrix(M))
     Q = Queue()
     q = Queue()
-    obj.levelorderTraversal(root,Q,q)
+    S = []
+    L= []
+    #obj.levelorderTraversal(root,Q,q)
+    #obj.printsidenodes(root,Q,L)
+
+    obj.zigzagtraversal_stack(root,S)
