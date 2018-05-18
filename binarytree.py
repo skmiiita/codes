@@ -209,14 +209,16 @@ class binaryTreeOps:
                 level = level + 1
 
             elif level%2==0:
+                if node.right:
+                    Q.put(node.right)
+                    q.put(node.right.data)
                 if node.left:
                     Q.put(node.left)
                     q.put(node.left.data)
 
-                if node.right:
-                    Q.put(node.right)
-                    q.put(node.right.data)
+
                 level = level + 1
+            print "level: ",level
 
     def zigzagtraversal_stack(self, root, S):
         if root is None:
@@ -224,7 +226,7 @@ class binaryTreeOps:
         if len(S) is 0:
             S.append(root)
         level = 1
-        while len(S) is not 0:
+        while len(S) != 0:
             node = S.pop()
             print node.data
             level +=1
@@ -264,4 +266,4 @@ if __name__=='__main__':
     #obj.levelorderTraversal(root,Q,q)
     #obj.printsidenodes(root,Q,L)
 
-    obj.zigzagtraversal_stack(root,S)
+    obj.zigzagtraversal(root,Q,q)
