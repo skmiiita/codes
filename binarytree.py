@@ -140,7 +140,9 @@ class binaryTreeOps:
             Q.put(root)
             q.put(root.data)
 
-        while Q.empty() is not None:
+        while True:
+            if Q.empty():
+                return root
             node = Q.get()
             print node.data
             if node.left:
@@ -194,7 +196,9 @@ class binaryTreeOps:
             Q.put(root)
             q.put(root.data)
         level = 1
-        while Q.empty() is not None:
+        while True:
+            if Q.empty():
+                return root
 
             node = Q.get()
             print node.data
@@ -240,6 +244,30 @@ class binaryTreeOps:
                     S.append(node.right)
                 if node.left:
                     S.append(node.left)
+    def childsumnode(self,root,Q):
+        if root is None:
+            return
+        leftdata = 0
+        rightdata = 0
+
+
+        if Q.empty():
+            Q.put(root)
+
+        while True:
+            if Q.empty():
+                return root
+            node = Q.get()
+            #print node.data
+            if node.left:
+                Q.put(node.left)
+                leftdata = node.left.data
+            if node.right:
+                Q.put(node.right)
+                rightdata = node.right.data
+            node.data = node.data + leftdata + rightdata
+            leftdata = 0
+            rightdata = 0
 
 if __name__=='__main__':
     root = node(5)
@@ -266,4 +294,5 @@ if __name__=='__main__':
     #obj.levelorderTraversal(root,Q,q)
     #obj.printsidenodes(root,Q,L)
 
-    obj.zigzagtraversal(root,Q,q)
+    root  = obj.childsumnode(root,Q)
+    obj.levelorderTraversal(root, Q, q)
