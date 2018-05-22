@@ -1,10 +1,9 @@
-import heapq
+def swap(a,b):
+    a=a^b
+    b=b^a
+    a=a^b
 
-li1 = [6, 7, 9, 4, 3, 5, 8, 10, 1]
+    print a,b
 
-# using heapify() to convert list into heap
-#heapq.heapify(li1)
-print (li1)
-heapq._heapify_max(li1)
-print (li1)
-#print(heapq.nlargest(3, li1))
+swap(5,7)
+print ord('a')

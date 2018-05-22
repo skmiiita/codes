@@ -80,14 +80,51 @@ class array_ops:
 
         '''
 
+def checkarrayelementsconsecutive(arr):
+    if len(arr) is 0:
+        return 0
+    max_e = max(arr)
+    min_e = min(arr)
+    if max_e - min_e + 1 != len(arr):
+        return 0
+    status = 0
+    print 'm'
+    for index in range(0,len(arr)):
+        if arr[abs(arr[index])-min_e]>=0:
+            arr[abs(arr[index]) - min_e] = -arr[abs(arr[index])-min_e]
+            status = 1
+        elif arr[abs(arr[index])-min_e] < 0:
+            return 0
+        print arr
+    if status == 1 and max_e - min_e + 1 == len(arr):
+        return 1
+
+def checkarrayelementsconsecutivedup(arr):
+    if len(arr) is 0:
+        return 0
+    max_e = max(arr)
+    min_e = min(arr)
+
+    status = 0
+    count = 0
+    print 'm'
+    for index in range(0,len(arr)):
+        if arr[abs(arr[index])-min_e]>=0:
+            arr[abs(arr[index]) - min_e] = -arr[abs(arr[index])-min_e]
+            status = 1
+            count +=1
+        elif arr[abs(arr[index])-min_e] < 0:
+            continue
+        print arr
+    if status == 1 and max_e - min_e + 1 == count:
+        return 1
+    else:
+        return 0
 
 
 
 if __name__ == '__main__':
-    arr = [4,1,2,7,8,9,6]
-    obj = array_ops(arr)
-    #print (obj.triplet_sum(18))
-    arr = [1,0,1,0,1,1,0,0,1,1,1]
-    print obj.sort10array(arr)
+   a =  [5, 2, 3, 6,4, 4, 6, 6]
+   print checkarrayelementsconsecutivedup(a)
 
 
