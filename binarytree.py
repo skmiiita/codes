@@ -188,62 +188,6 @@ class binaryTreeOps:
             if node.right:
                 Q.put(node.right)
 
-    def zigzagtraversal(self,root,Q,q):
-        if root is None:
-            return
-
-        if Q.empty():
-            Q.put(root)
-            q.put(root.data)
-        level = 1
-        while True:
-            if Q.empty():
-                return root
-
-            node = Q.get()
-            print node.data
-            if level%2==1:
-                if node.left:
-                    Q.put(node.left)
-                    q.put(node.left.data)
-                if node.right:
-                    Q.put(node.right)
-                    q.put(node.right.data)
-
-                level = level + 1
-
-            elif level%2==0:
-                if node.right:
-                    Q.put(node.right)
-                    q.put(node.right.data)
-                if node.left:
-                    Q.put(node.left)
-                    q.put(node.left.data)
-
-
-                level = level + 1
-            print "level: ",level
-
-    def zigzagtraversal_stack(self, root, S):
-        if root is None:
-            return
-        if len(S) is 0:
-            S.append(root)
-        level = 1
-        while len(S) != 0:
-            node = S.pop()
-            print node.data
-            level +=1
-            if level%2==0:
-                if node.left:
-                    S.append(node.left)
-                if node.right:
-                    S.append(node.right)
-            elif level %2 ==1:
-                if node.right:
-                    S.append(node.right)
-                if node.left:
-                    S.append(node.left)
     def childsumnode(self,root,Q):
         if root is None:
             return
@@ -268,10 +212,73 @@ class binaryTreeOps:
             node.data = node.data + leftdata + rightdata
             leftdata = 0
             rightdata = 0
+
     def sumtree(self,root):
         if root is None:
             return
-        
+        leftdata = 0
+        rightdata = 0
+        self.sumtree(root.left)
+        self.sumtree(root.right)
+        if root.left:
+            leftdata  = root.left.data
+        if root.right:
+            rightdata = root.right.data
+        root.data = root.data + leftdata+rightdata
+        return root
+
+
+    def zigzagtraversal(self,root,s1,s2):
+        level = 0
+
+        if root is None:
+            return None
+        if not s1 and not s2:
+            s1.append(root)
+            level = 1
+        # find replacement for infinite while
+        while True:
+            if not s1 and not s2:
+                return root
+            if level == 1:
+                while s1:
+                    node = s1.pop()
+                    print node.data
+                    if node.left:
+                        s2.append(node.left)
+                    if node.right:
+                        s2.append(node.right)
+                level = 0
+            elif level == 0:
+
+                while s2:
+                    node = s2.pop()
+                    print node.data
+                    if node.right:
+                        s1.append(node.right)
+                    if node.left:
+                        s1.append(node.left)
+
+                level = 1
+        return root
+
+    def findLCAPath(self,root,ll,n):
+        if root is None:
+            return None
+        ll.append(root.data)
+        if root.data == n:
+            return True
+
+
+        if (self.findLCAPath(root.left,ll,n) or self.findLCAPath(root.right,ll,n)):
+            return True
+        ll.pop()
+
+    def findLCA(self,root):
+        if root is None:
+            return None
+
+
 if __name__=='__main__':
     root = node(5)
     root.right = node(7)
@@ -292,10 +299,14 @@ if __name__=='__main__':
     #print(np.matrix(M))
     Q = Queue()
     q = Queue()
-    S = []
-    L= []
+    s1 = []
+    s2= []
     #obj.levelorderTraversal(root,Q,q)
     #obj.printsidenodes(root,Q,L)
 
-    root  = obj.childsumnode(root,Q)
-    obj.levelorderTraversal(root, Q, q)
+    #root  = obj.sumtree(root)
+    #obj.zigzagtraversal(root, s1, s2)
+    obj.findLCAPath(root,s1,10)
+    print s1
+
+
