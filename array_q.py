@@ -121,6 +121,46 @@ def checkarrayelementsconsecutivedup(arr):
     else:
         return 0
 
+    def majorityelement(self,arr):
+        majorc = self.majoritycandidate(arr)
+        count = 0
+        for index in range(0,len(arr)):
+            if arr[index] == arr[majorc]:
+                count +=1
+        if count >= len(arr)/2:
+            return 1
+        else:
+            return 0
+    def majoritycandidate(self,arr):
+        majorind = 0
+        count  = 1
+
+        for index in range(1,len(arr)):
+            if arr[majorind] == arr[index]:
+                count += 1
+
+            else:
+                count -=1
+            if count == 0:
+                count = 1
+                majorind = index
+
+        return majorind
+    def majorityelementhashing(self,arr):
+        dict = {}
+        for index in range(0,len(arr)):
+            if arr[index] not in dict:
+                dict[arr[index]]=1
+            else:
+                dict[arr[index]] += 1
+        print dict
+
+        for key,value in dict.iteritems():
+            if value>=len(arr)/2:
+                return key
+            else:
+                continue
+        return 0
 
 
 if __name__ == '__main__':

@@ -268,7 +268,10 @@ class binaryTreeOps:
             node.data = node.data + leftdata + rightdata
             leftdata = 0
             rightdata = 0
-
+    def sumtree(self,root):
+        if root is None:
+            return
+        
 if __name__=='__main__':
     root = node(5)
     root.right = node(7)
