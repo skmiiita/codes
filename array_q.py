@@ -195,16 +195,17 @@ def checklastindexsortedarray(arr, start, end, x):
 
 
 def checkoneelementrepeating(arr, start, end):
+    arr_len = len(arr)
     while (start <= end):
         mid = start + (end - start) / 2
         if (mid == 0 and arr[mid + 1] > arr[mid]) or (mid == end - 1 and arr[mid - 1] < arr[mid]):
             return arr[mid]
         if arr[mid + 1] > arr[mid] > arr[mid - 1]:
             return arr[mid]
-        elif arr[mid] < x:
-            start = mid + 1
-        else:
-            end = mid - 1
+        if arr_len %2 ==1 and arr[mid-1] == arr[mid] and arr[mid] < arr[mid+1] :
+            start = mid+1
+        elif arr_len %2==1 and arr[mid-1] < arr[mid] and arr[mid]==arr[mid+1]:
+            end = mid-1
     return -1
 
 
@@ -248,4 +249,4 @@ def countRotations(arr, low, high):
 
 if __name__ == '__main__':
     a = [1, 1, 3, 3, 4, 5, 5, 7, 7, 8, 8]
-    print checkoneelementrepeating(a, 0, len(a) - 1, 4)
+    print checkoneelementrepeating(a, 0, len(a) - 1)
