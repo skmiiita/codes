@@ -1,4 +1,4 @@
-import numpy as np
+#import numpy as np
 import queue_datastructure
 from Queue import *
 class node :
@@ -277,6 +277,14 @@ class binaryTreeOps:
     def findLCA(self,root):
         if root is None:
             return None
+    def findlevelofanode(self,root,k,level):
+        if root is None:
+            return False
+        if root.data == k:
+            return level
+
+        return self.findlevelofanode(root.left,k,level+1) or self.findlevelofanode(root.right,k,level+1)
+
 
 
 if __name__=='__main__':
@@ -306,7 +314,8 @@ if __name__=='__main__':
 
     #root  = obj.sumtree(root)
     #obj.zigzagtraversal(root, s1, s2)
-    obj.findLCAPath(root,s1,10)
-    print s1
+    level = 1
+    print obj.findlevelofanode(root,9,level)
+
 
 

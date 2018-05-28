@@ -7,3 +7,5 @@ def swap(a,b):
 
 swap(5,7)
 print ord('a')
+
+print float('inf')

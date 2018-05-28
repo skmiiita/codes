@@ -244,9 +244,77 @@ def countRotations(arr, low, high):
 
     return countRotations(arr, mid + 1, high)
 
+def firstrepeating(arr):
+    dict = {}
+    firstrep = 10000000000
+    for index in range(0, len(arr)):
+        if arr[index] not in dict:
+            dict[arr[index]] = index
+        else:
+            if dict[arr[index]] < firstrep:
+                firstrep = dict[arr[index]]
+    return arr[firstrep]
 
-# def checkrepsinsorted(arr,start,end,x):
+def findbitomicpoint(arr,start,end):
+    while start<=end:
+        mid = start + (end-start)/2
+        if start == end:
+            return start
+        if end ==start+1 and arr[start]>arr[end]:
+            return start
+        elif end ==start+1 and arr[start]<arr[end]:
+            return end
+        if arr[mid]>arr[mid+1] and arr[mid] > arr[mid-1]:
+            return mid
+        elif arr[mid + 1] > arr[mid] > arr[mid - 1]:
+            start = mid+1
+        elif arr[mid - 1]>arr[mid] > arr[mid + 1]:
+            end = mid-1
+    return -1
+def findminoperationto(arr):
 
+    result = 0
+    n = len(arr)
+    while True:
+        zerocount = 0
+        for index in range(0,len(arr)):
+            if arr[index]%2==1:
+                break
+            elif arr[index]==0:
+                zerocount +=1
+        if zerocount == len(arr):
+            return result
+        print index
+        if index == len(arr)-1:
+            arr = [x/2 for x in arr]
+            result +=1
+        for jindex in range(index,len(arr)):
+            if arr[jindex]%2==1:
+                arr[jindex] -=1
+                result+=1
+        print arr
+def find3high2low(arr):
+    m1 = m2=m3=arr[0]
+    l1 = l2 =100000000000000000000
+    for i in range(0,len(arr)):
+        if arr[i]>m1:
+            m3=m2
+            m2 = m1
+            m1 = arr[i]
+        if m1>arr[i]>m2:
+            m3=m2
+            m2 = arr[i]
+        if  m2>arr[i]>m3:
+            m3 = arr[i]
+        if l1>arr[i]:
+            l2=l1
+            l1 = arr[i]
+        if l2>arr[i]>l1:
+            l2 = arr[i]
+    return m1,m2,m3,l1,l2
 if __name__ == '__main__':
-    a = [1, 1, 3, 3, 4, 5, 5, 7, 7, 8, 8]
-    print checkoneelementrepeating(a, 0, len(a) - 1)
+    a = [-3,9,8,20,-17,5,1]
+    b = [5,6,7,8,9,10,1,2,3]
+    c=[10, 20, 30, 40, 50]
+    d = [5,4,3,2,1]
+    print find3high2low(a)
