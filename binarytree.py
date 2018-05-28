@@ -273,10 +273,23 @@ class binaryTreeOps:
         if (self.findLCAPath(root.left,ll,n) or self.findLCAPath(root.right,ll,n)):
             return True
         ll.pop()
+        return False
 
-    def findLCA(self,root):
+    def findLCA(self,root,n1,n2):
         if root is None:
             return None
+        lpath = []
+        rpath = []
+        isfound1 = self.findLCAPath(root,lpath,n1)
+        isfound2 = self.findLCAPath(root,rpath,n2)
+        if not isfound1 or not isfound2:
+            return False
+        i,j=0,0
+        while i<len(lpath) and j<len(rpath):
+            if lpath[i] != rpath[j]:
+                return lpath[i-1]
+            i+=1
+            j+=1
     def findlevelofanode(self,root,k,level):
         if root is None:
             return False
@@ -317,5 +330,6 @@ if __name__=='__main__':
     level = 1
     print obj.findlevelofanode(root,9,level)
 
+    print obj.findLCA(root,3,12)
 
 

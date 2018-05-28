@@ -273,6 +273,22 @@ def findbitomicpoint(arr,start,end):
     return -1
 def findminoperationto(arr):
 
+def sort012(arr):
+    low = 0
+    high = len(arr)-1
+    mid  = 0
+    for index in range(mid,len(arr)):
+        if arr[mid] == 0:
+            arr[low],arr[mid] = arr[mid],arr[low]
+            low+=1
+            mid+=1
+        elif arr[mid] == 2:
+            arr[high],arr[mid] = arr[mid],arr[high]
+            high-=1
+        elif arr[mid] == 1:
+            mid+=1
+    return arr
+
     result = 0
     n = len(arr)
     while True:
@@ -313,6 +329,9 @@ def find3high2low(arr):
             l2 = arr[i]
     return m1,m2,m3,l1,l2
 if __name__ == '__main__':
+    #a = [0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1]
+    a = [2,0,1,0,1,2,0,1,1]
+    print sort012(a)
     a = [-3,9,8,20,-17,5,1]
     b = [5,6,7,8,9,10,1,2,3]
     c=[10, 20, 30, 40, 50]
