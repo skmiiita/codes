@@ -1,0 +1,2 @@
+def finitenary(hash):
+    return
