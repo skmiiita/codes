@@ -39,8 +39,7 @@ class array_ops:
         if self.array[mid] < self.array[mid + 1] and self.array[mid] < self.array[mid - 1]:
             return mid
 
-        elif self.array[mid] < self.array[mid + 1] and self.array[mid] > self.array[0] and self.array[mid] < self.array[
-            mid - 1]:
+        elif self.array[mid + 1] > self.array[mid] < self.array[mid] < self.array[mid - 1]:
             self.countrotationcount(mid + 1, high)
         elif self.array[mid] < self.array[mid + 1] and self.array[mid] < self.array[mid - 1]:
             pass
@@ -271,7 +270,7 @@ def findbitomicpoint(arr,start,end):
         elif arr[mid - 1]>arr[mid] > arr[mid + 1]:
             end = mid-1
     return -1
-def findminoperationto(arr):
+
 
 def sort012(arr):
     low = 0
@@ -289,6 +288,7 @@ def sort012(arr):
             mid+=1
     return arr
 
+def findminoperationto(arr):
     result = 0
     n = len(arr)
     while True:
