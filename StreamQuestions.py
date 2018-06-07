@@ -14,6 +14,7 @@ def checkpallindromstring(string):
                 ispallindrom = 1
 
         elif (i+1)%2==1:
+            right = string[i]+right
             l = len(right)
             oddchar = right[l - 1]
             right = right[:l-1]

@@ -328,12 +328,71 @@ def find3high2low(arr):
         if l2>arr[i]>l1:
             l2 = arr[i]
     return m1,m2,m3,l1,l2
+
+
+def nextsmallestlarge(arr):
+    arr = list(arr)
+    i = len(arr) - 1
+    min = arr[len(arr) - 1]
+    mini = len(arr) - 1
+    while i >= 0:
+
+        if min > arr[i]:
+            min = arr[i]
+            mini = i
+
+        if arr[i - 1] < arr[i]:
+            break
+        i -= 1
+
+    if i == 0:
+        return -1
+    j = i - 1
+    print i, j
+    arr[j], arr[mini] = arr[mini], arr[j]
+    print arr
+    arr = arr[:i] + arr[i:][::-1]
+
+
+    print arr
+    return "".join(arr)
+
+
+from sets import Set
+
+
+def findLongestConseqSubseq(arr, n):
+    s = Set()
+    ans = 0
+
+    # Hash all the array elements
+    for ele in arr:
+        s.add(ele)
+    print s
+    # check each possible sequence from the start
+    # then update optimal length
+    for i in range(n):
+
+        # if current element is the starting
+        # element of a sequence
+        if (arr[i] - 1) not in s:
+
+            # Then check for next elements in the
+            # sequence
+            j = arr[i]
+            while (j in s):
+                j += 1
+
+            # update  optimal length if this length
+            # is more
+            ans = max(ans, j - arr[i])
+    return ans
+
+
+# Driver function
 if __name__ == '__main__':
-    #a = [0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1]
-    a = [2,0,1,0,1,2,0,1,1]
-    print sort012(a)
-    a = [-3,9,8,20,-17,5,1]
-    b = [5,6,7,8,9,10,1,2,3]
-    c=[10, 20, 30, 40, 50]
-    d = [5,4,3,2,1]
-    print find3high2low(a)
+    n = 7
+    arr = [1, 9, 3, 10, 4, 20, 2]
+    print "Length of the Longest contiguous subsequence is ",
+    print  findLongestConseqSubseq(arr, n)
+
