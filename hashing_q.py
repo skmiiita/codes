@@ -35,16 +35,16 @@ def findPairs(arr, n):
     return False
 
 
-# driver program
-arr = [3, 4, 7, 1, 2, 9, 8, 1, 2, 3]
-# arr = [1,3,6,7]
-arr.sort()
-print arr
-n = len(arr)
-print findPairs(arr, n)
-
+def multiplicationequaltogivenval(arr,x):
+    for index in range(0,len(arr)):
+        if x%arr[index]!=0:
+            pass
+        if x/arr[index] in arr:
+            return True
+    return False
 # This code is contributed by Aditi Sharma
 
 if __name__ == '__main__':
     a  = {'c': 'g', 'b': 'c', 'g': 'd', 'd': 'b'}
-    finitenary(a)
+    arr = [10,20,9,40]
+    print multiplicationequaltogivenval(arr,40)
