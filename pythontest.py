@@ -1,3 +1,4 @@
+"""
 ASCII_SIZE = 256
 
 
@@ -34,3 +35,6 @@ swap(5,7)
 print ord('a')
 
 print float('inf')
+"""
+
+raw_input("enter")
