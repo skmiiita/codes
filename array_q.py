@@ -413,6 +413,24 @@ def stockbuysell(arr):
         elif i==n-1 and maxdiff > 0:
             print min, i
         i+=1
+def checkpairdivisiblebyk(arr,k):
+    if len(arr)%2==1:
+        return False
+    count  = len(arr)/2
+    dict = {}
+    for i in range(0,len(arr)):
+        rem = arr[i]%k
+        if rem in dict:
+            dict[rem]+=1
+        else:
+            dict[rem] = 1
+    for key,value in dict.iteritems():
+        if value %2 ==1:
+            if k-value in dict:
+                count-=1
+                dict[value]-=1
+                dict[k-value]-=1
+
 
 # Driver function
 if __name__ == '__main__':
