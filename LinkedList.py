@@ -99,32 +99,69 @@ def printList(head):
         print temp.data
         temp = temp.next
 
+def addtwolists(list1, list2):
+    if list1 is None or list2 is None:
+        return
+    result = []
+    carry = 0
+    lp1 = list1
+    lp2 = list2
+    while (lp1 is not None and lp2 is not None):
+        sum = lp1.data + lp2.data + carry
+
+        num = sum %10
+        result= [num] + result
+        carry = sum / 10
+        lp1 = lp1.next
+        lp2 = lp2.next
+    if lp1 is None and lp2 is None:
+        if carry !=0:
+            result = [carry] + result
+
+    while (lp1 is not None):
+        sum = lp1.data + carry
+        num = sum % 10
+        result = [num] + result
+        carry = sum/10
+        lp1 = lp1.next
+
+    while (lp2 is not None):
+        sum = lp2.data + carry
+        num = sum % 10
+        result = [num] + result
+        carry = sum/10
+        lp2= lp2.next
+    return result
+
+
+
+
 if __name__=='__main__':
     llist = LinkedList()
     llist.head = Node(1)
     second = Node(2)
     third = Node(3)
     fourth = Node(4)
-    fifth = Node(3)
-    sixth = Node(2)
-    seven = Node(1)
+
     llist.head.next = second;
     second.next = third;
+    '''
     third.next = fourth
     fourth.next = fifth
     fifth.next = sixth
     sixth.next = seven
     #llist.head = llist.head.next
+    '''
     nlist = LinkedList()
     nlist.head = Node(1)
-    nlist.head.next = Node(1)
-    nlist.head.next.next = Node(1)
-    nlist.head.next.next.next = Node(1)
-    nlist.head.next.next.next.next = Node(1)
+    nlist.head.next = Node(3)
+    #nlist.head.next.next = Node(4)
+    #nlist.head.next.next.next = Node(1)
+    #nlist.head.next.next.next.next = Node(1)
     #llist.reverse_list()
     #llist.printList()
     #print nlist.checkpallindromicstring()
     #print(nlist.getMiddle().data)
-    print nlist.checkpallindromiclist()
-
-
+    llist.printList()
+    nlist.printList()
+    print addtwolists(llist.head, nlist.head)

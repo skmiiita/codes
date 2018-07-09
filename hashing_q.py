@@ -1,3 +1,5 @@
+import collections
+from collections import OrderedDict
 def finitenary(hash):
 
     for key, value in hash.iteritems():
@@ -33,18 +35,32 @@ def findPairs(arr, n):
     if count > 0:
         return True
     return False
+#def checkoccurence(p1,p2):
 
+def sortbyfrequency(arr):
+    dict = {}
+    dict_occur = {}
+    for i in range(0,len(arr)):
+        if arr[i] not in dict:
+            dict[arr[i]] = 1
+            dict_occur[arr[i]] = i
+        else:
+            dict[arr[i]] +=1
+    print dict_occur
+    arr = sorted(enumerate(arr), key=lambda value: (dict[value],dict_occur[value]),reverse=True)
 
-# driver program
-arr = [3, 4, 7, 1, 2, 9, 8, 1, 2, 3]
-# arr = [1,3,6,7]
-arr.sort()
-print arr
-n = len(arr)
-print findPairs(arr, n)
+    print arr
+
 
 # This code is contributed by Aditi Sharma
 
 if __name__ == '__main__':
-    a  = {'c': 'g', 'b': 'c', 'g': 'd', 'd': 'b'}
-    finitenary(a)
+    # driver program
+    arr = [2,5,2,5,2,8,5,6,8,8]
+    # arr = [1,3,6,7]
+
+    n = len(arr)
+    sortbyfrequency(arr)
+
+    l = [ 2, 3, 4, 3, 3, 3, 6, 7, 1, 1, 9, 3, 2]
+    print sorted(l, key=lambda x : l.count,reverse=True)

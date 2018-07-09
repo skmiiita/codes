@@ -23,10 +23,21 @@ class bst_operations:
     def inorder(self,root):
         if root is None:
             return
-        self.inorder(root.left)
-        print root.data
         self.inorder(root.right)
+        print root.data
+        self.inorder(root.left)
+    def greatersumtreeutil(self,root,summ):
 
+        return self.greatersumtreeutil(root.right,summ)
+        root.data = summ[0]
+        summ[0] = summ[0] + root.data
+        #print "sum = ", summ
+        return self.greatersumtreeutil(root.left,summ)
+    def greatersumtree(self, root):
+        summ = []
+        print root.data
+        self.greatersumtreeutil(root,summ)
+        #self.inorder(root)
 
 if __name__=='__main__':
     r = node(50)
@@ -37,6 +48,7 @@ if __name__=='__main__':
     bst.insert(r, node(70))
     bst.insert(r, node(60))
     bst.insert(r, node(80))
-
-    bst.inorder(r)
+    #bst.inorder(r)
+    #bst.greatersumtreeutil(r,0)
+    bst.greatersumtree(r)
 

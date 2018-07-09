@@ -1,3 +1,5 @@
+import sys
+import array
 ASCII_SIZE = 256
 
 
@@ -25,12 +27,12 @@ def swap(a,b):
     a=a^b
 
     print a,b
+a=[1]
 
-# Driver program to test the above function
-str = "sample string"
-print "Max occurring character is " + getMaxOccuringChar(str)
-
-swap(5,7)
-print ord('a')
-
-print float('inf')
+b = array.array('i',[5])
+import collections
+arr = [ 5,3, 3, 6, 6, 6, 5, 5, 8 ]
+counter = collections.Counter(arr)
+print counter
+arr = sorted( arr, key=lambda x: (counter[x], x), reverse=True )
+print arr

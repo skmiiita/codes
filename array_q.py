@@ -388,11 +388,36 @@ def findLongestConseqSubseq(arr, n):
             ans = max(ans, j - arr[i])
     return ans
 
+def stockbuysell(arr):
+    n = len(arr)
+    i=1
+    max = 0
+    min = 0
+    maxdiff = 0
+
+    while i < n:
+        #print "min= ",min
+        if arr[i]>arr[min]:
+            maxdiff = arr[i]  - arr[min]
+        else:
+            #min = i
+
+            if maxdiff > 0:
+                print min, i-1
+            min = i
+            i=i+1
+            maxdiff = 0
+            continue
+        if i == n - 1 and maxdiff <= 0:
+            print -1
+        elif i==n-1 and maxdiff > 0:
+            print min, i
+        i+=1
 
 # Driver function
 if __name__ == '__main__':
-    n = 7
-    arr = [1, 9, 3, 10, 4, 20, 2]
-    print "Length of the Longest contiguous subsequence is ",
-    print  findLongestConseqSubseq(arr, n)
+    a = [100, 180, 260, 310, 40, 535, 695]
+    b = [100,90,80,70,100,120]
+    c = [100,90,80,60,50,40]
+    stockbuysell(c)
 

@@ -24,9 +24,10 @@ def search(arr,low,high,n) :
 
                         
 if __name__ == "__main__":
-        a = random.sample(range(1, 10000001), 10000000)
-        a.sort()
+        #a = random.sample(range(1, 10000001), 10000000)
+        #a.sort()
         #print (a)
+
         start_time = time.time()
         b = search(a,0,len(a)-1,100)
         print (b)
