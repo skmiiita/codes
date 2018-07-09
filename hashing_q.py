@@ -1,5 +1,3 @@
-import collections
-from collections import OrderedDict
 def finitenary(hash):
 
     for key, value in hash.iteritems():
@@ -51,16 +49,16 @@ def sortbyfrequency(arr):
 
     print arr
 
+# driver program
+arr = [3, 4, 7, 1, 2, 9, 8, 1, 2, 3]
+# arr = [1,3,6,7]
+arr.sort()
+print arr
+n = len(arr)
+print findPairs(arr, n)
 
 # This code is contributed by Aditi Sharma
 
 if __name__ == '__main__':
-    # driver program
-    arr = [2,5,2,5,2,8,5,6,8,8]
-    # arr = [1,3,6,7]
-
-    n = len(arr)
-    sortbyfrequency(arr)
-
-    l = [ 2, 3, 4, 3, 3, 3, 6, 7, 1, 1, 9, 3, 2]
-    print sorted(l, key=lambda x : l.count,reverse=True)
+    a  = {'c': 'g', 'b': 'c', 'g': 'd', 'd': 'b'}
+    finitenary(a)

@@ -20,4 +20,4 @@ def tripletsumzero(arr):
 
 
 
-tripletsumzero([1, -2, 1, 0, 5])
+tripletsumzero([-1,1,0,2,-2,0])

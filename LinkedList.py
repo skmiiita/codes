@@ -136,28 +136,101 @@ def addtwolists(list1, list2):
 
 
 
+def detectloop(head):
+    if head is None:
+        return False
+    sp = head
+    fp = head
+
+    while (fp and sp and fp.next):
+        fp = fp.next.next
+        sp = sp.next
+        #print fp.data, sp.data
+        if fp == sp:
+            print "loop detected"
+            return fp
+    print fp.next
+    return False
+def countnodesinloop(head):
+    if head is None:
+        return False
+    '''
+    sp = head
+    fp = head
+
+    while (fp and sp and fp.next):
+        fp = fp.next.next
+        sp = sp.next
+        print fp.data, sp.data
+        if fp == sp:
+            break
+    if fp.next is None:
+        return 0
+    '''
+    start = head.next
+    #start = start.next
+    ct=1
+    while (start !=head):
+        ct+=1
+        start=start.next
+    return ct
+def removeloop(head):
+    if head is None:
+        return False
+    loopnode = detectloop(head)
+    if loopnode is False:
+        return False
+    loopnodect = countnodesinloop(loopnode)
+    #print loopnodect
+    pointer1 = head
+    pointer2 = head
+    i=0
+    while (i<loopnodect):
+        pointer2 = pointer2.next
+        i+=1
+    loopstartnode = None
+    while (pointer1 != pointer2):
+        pointer2 = pointer2.next
+        pointer1 = pointer1.next
+        loopstartnode = pointer1
+    #print loopstartnode.data
+
+    start = loopstartnode
+
+    while (start.next != loopstartnode):
+        start = start.next
+    print start.data
+
+    start.next = None
+    detectloop(head)
+
+    return head
+
+
 if __name__=='__main__':
     llist = LinkedList()
-    llist.head = Node(1)
+    start=llist.head = Node(1)
     second = Node(2)
     third = Node(3)
     fourth = Node(4)
-
+    fifth = Node(5)
+    sixth = Node(6)
+    seven = Node(7)
     llist.head.next = second;
     second.next = third;
-    '''
     third.next = fourth
     fourth.next = fifth
     fifth.next = sixth
     sixth.next = seven
+    seven.next = third
     #llist.head = llist.head.next
     '''
     nlist = LinkedList()
     nlist.head = Node(1)
-    nlist.head.next = Node(3)
-    #nlist.head.next.next = Node(4)
-    #nlist.head.next.next.next = Node(1)
-    #nlist.head.next.next.next.next = Node(1)
+    nlist.head.next = Node(1)
+    nlist.head.next.next = Node(1)
+    nlist.head.next.next.next = Node(1)
+    nlist.head.next.next.next.next = Node(1)
     #llist.reverse_list()
     #llist.printList()
     #print nlist.checkpallindromicstring()
@@ -165,3 +238,7 @@ if __name__=='__main__':
     llist.printList()
     nlist.printList()
     print addtwolists(llist.head, nlist.head)
+    print nlist.checkpallindromiclist()
+    '''
+    head = removeloop(start)
+    print detectloop(head)
