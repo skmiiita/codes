@@ -298,8 +298,23 @@ class binaryTreeOps:
             return level
 
         return self.findlevelofanode(root.left,k,level+1) or self.findlevelofanode(root.right,k,level+1)
+    def lpathsum_utils(self,root,res):
+        if root is None:
+            return 0
+        lsum = self.lpathsum_utils(root.left,res)
+        rsum = self.lpathsum_utils(root.right,res)
+        print lsum, rsum
+        res[0] = res[0] + max(lsum,rsum)
+        res[0] =  max (res[0],root.data+lsum)
+        res[0] = max(res[0],root.data+rsum)
+        res[0] = max(res[0],lsum+rsum,root.data)
 
+    def lpathsum(self,root):
+        res = [0]
 
+        self.lpathsum_utils(root,res)
+
+        print res
 
 if __name__=='__main__':
     root = node(5)
@@ -329,8 +344,10 @@ if __name__=='__main__':
     #root  = obj.sumtree(root)
     #obj.zigzagtraversal(root, s1, s2)
     level = 1
-    print obj.findlevelofanode(root,9,level)
+    #print obj.findlevelofanode(root,9,level)
 
-    print obj.findLCA(root,3,12)
+    #print obj.findLCA(root,3,12)
+
+    obj.lpathsum(root)
 
 
