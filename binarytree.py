@@ -298,23 +298,28 @@ class binaryTreeOps:
             return level
 
         return self.findlevelofanode(root.left,k,level+1) or self.findlevelofanode(root.right,k,level+1)
-    def lpathsum_utils(self,root,res):
+    def lpathsum_utils(self,root):
         if root is None:
             return 0
-        lsum = self.lpathsum_utils(root.left,res)
-        rsum = self.lpathsum_utils(root.right,res)
+        print "root ", root.data
+        lsum = self.lpathsum_utils(root.left)
+        rsum = self.lpathsum_utils(root.right)
         print lsum, rsum
-        res[0] = res[0] + max(lsum,rsum)
-        res[0] =  max (res[0],root.data+lsum)
-        res[0] = max(res[0],root.data+rsum)
-        res[0] = max(res[0],lsum+rsum,root.data)
+        if lsum and rsum:
+            self.lpathsum_utils.res = self.lpathsum_utils.res + max(lsum,rsum)
+            self.lpathsum_utils.res = max(self.lpathsum_utils.res, lsum + rsum, root.data)
+        if lsum:
+            self.lpathsum_utils.res =  max (self.lpathsum_utils.res,root.data+lsum)
+        if rsum:
+            self.lpathsum_utils.res = max(self.lpathsum_utils.res,root.data+rsum)
+        return self.lpathsum_utils.res
 
     def lpathsum(self,root):
         res = [0]
+        self.lpathsum_utils.res = float("-inf")
+        res = self.lpathsum_utils(root)
 
-        self.lpathsum_utils(root,res)
-
-        print res
+        print self.lpathsum_utils.res
 
 if __name__=='__main__':
     root = node(5)
@@ -350,4 +355,4 @@ if __name__=='__main__':
 
     obj.lpathsum(root)
 
-
+#https://ide.geeksforgeeks.org/mjVvmGKF4n    : inorder without rec

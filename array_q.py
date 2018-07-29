@@ -431,11 +431,60 @@ def checkpairdivisiblebyk(arr,k):
                 dict[value]-=1
                 dict[k-value]-=1
 
+def kthfrom2sortedarrayUtil(arr1,arr2,low1,high1,low2,high2,k):
+
+    mid1 = low1 + (high1-low1)/2
+    mid2 = low2 + (high2-low2)/2
+
+    if mid1+mid2 == k:
+        return min(arr1[mid1],arr2[mid2])
+    elif mid1+mid2<k:
+        if arr1[mid1] > arr2[mid2]:
+            kthfrom2sortedarrayUtil(arr1,arr2,low1,mid1,mid2,high2,k)
+        else:
+
+            kthfrom2sortedarrayUtil(arr1, arr2, low1, mid1, mid2, high2, k)
+    else:
+        if arr1[mid1] > arr2[mid2]:
+            kthfrom2sortedarrayUtil(arr1,arr2,low1,mid1,mid2,high2,k)
+        else:
+
+            kthfrom2sortedarrayUtil(arr1, arr2, low1, mid1, mid2, high2, k)
+
+def findpivot(arr,low,high):
+    #if high > 0  and arr[high] < arr[high-1]:
+        #return high
+
+    mid = low + (high-low)/2
+
+    if mid > 0  and mid < high and arr[mid-1] > arr[mid] < arr[mid+1]:
+        return mid
+    elif arr[high] < arr[mid]:
+        findpivot(arr,mid+1,high)
+    else:
+        findpivot(arr,0,mid-1)
+
+def searchinsortedrotatedarray(arr,k,low,high):
+    mid = low + (high-low)/2
+    if arr[mid] == k:
+        return mid
+    if a[low]<a[mid]:
+        if k >= arr[low] and k <arr[mid]:
+            searchinsortedrotatedarray(arr,k,low,mid-1)
+        else:
+            searchinsortedrotatedarray(arr,k,mid+1,high)
+    else:
+        if k > arr[mid] and k <=arr[high]:
+            searchinsortedrotatedarray(arr, k,mid+1, high)
+        else:
+            searchinsortedrotatedarray(arr, k, low, mid - 1)
+
 
 # Driver function
 if __name__ == '__main__':
     a = [100, 180, 260, 310, 40, 535, 695]
     b = [100,90,80,70,100,120]
     c = [100,90,80,60,50,40]
-    stockbuysell(c)
+    arr = [5,6,7,8,9,10,1,2,3]
+    print searchinsortedrotatedarray(arr,3,0,8)
 

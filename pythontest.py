@@ -35,4 +35,5 @@ arr = [ 5,3, 3, 6, 6, 6, 5, 5, 8 ]
 counter = collections.Counter(arr)
 print counter
 arr = sorted( arr, key=lambda x: (counter[x], x), reverse=True )
-print arr
+
+print ord('b')-ord('a')
