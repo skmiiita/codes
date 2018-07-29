@@ -431,6 +431,28 @@ def checkpairdivisiblebyk(arr,k):
                 dict[value]-=1
                 dict[k-value]-=1
 
+def kthfrom2sortedarrayUtil(arr1,arr2,low1,high1,low2,high2,k):
+
+    mid1 = low1 + (high1-low1)/2
+    mid2 = low2 + (high2-low2)/2
+
+    if mid1+mid2 == k:
+        return min(arr1[mid1],arr2[mid2])
+    elif mid1+mid2<k:
+        if arr1[mid1] > arr2[mid2]:
+            kthfrom2sortedarrayUtil(arr1,arr2,low1,mid1,mid2,high2,k)
+        else:
+
+            kthfrom2sortedarrayUtil(arr1, arr2, low1, mid1, mid2, high2, k)
+    else:
+        if arr1[mid1] > arr2[mid2]:
+            kthfrom2sortedarrayUtil(arr1,arr2,low1,mid1,mid2,high2,k)
+        else:
+
+            kthfrom2sortedarrayUtil(arr1, arr2, low1, mid1, mid2, high2, k)
+
+def kthfrom2sortedarray():
+
 
 # Driver function
 if __name__ == '__main__':

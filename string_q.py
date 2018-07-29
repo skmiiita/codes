@@ -63,6 +63,9 @@ def reverseeachwordinstring(string):
             output +=reversestring(string,start,index)
     print output
 
+def firstnonrepeatingcharacter(string):
+    if string is None:
+        return None
 
 if __name__ == '__main__':
     # print parathensesischecker('[()]{}{[()()]()]')
