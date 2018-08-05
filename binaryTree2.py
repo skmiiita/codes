@@ -62,14 +62,32 @@ def printInorder(root):
     print root.data
     printInorder(root.right)
 
+def printfullnodes(root):
+    if root is None:
+        return
+    if root.left and root.right:
+        print root.data
+    printfullnodes(root.left)
+    printfullnodes(root.right)
+
+def checksumtree(root):
+    if root is None:
+        return True
+    if not root.left and not root.right:
+        return root.data
+
+    if checksumtree(root.left) and checksumtree(root.right) and root.data == root.left.data + root.right.data :
+        return True
+    return False
+
 if __name__ == '__main__':
-    root = node(10)
-    root.right = node(2)
-    root.left = node(8)
-    root.left.left = node(3)
-    root.right.left = node(2)
-    #root.right.right = node(5)
-    root.left.right = node(50)
+    root = node(26)
+    root.right = node(3)
+    root.left = node(10)
+    root.left.left = node(4)
+    #root.right.left = node(7)
+    root.right.right = node(3)
+    root.left.right = node(6)
     #print sumTreeP(root)
     #printInorder(root)
-    Q = Queue()
+    print checksumtree(root)
