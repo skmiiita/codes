@@ -466,18 +466,23 @@ def findpivot(arr,low,high):
 
 def searchinsortedrotatedarray(arr,k,low,high):
     mid = low + (high-low)/2
+    print "low      high       mid"
+    print low,      high,        mid
     if arr[mid] == k:
+        print "mm"
         return mid
-    if a[low]<a[mid]:
+    elif arr[low]<=arr[mid]:
+        print "m1"
         if k >= arr[low] and k <arr[mid]:
-            searchinsortedrotatedarray(arr,k,low,mid-1)
+            return searchinsortedrotatedarray(arr,k,low,mid-1)
         else:
-            searchinsortedrotatedarray(arr,k,mid+1,high)
+            return searchinsortedrotatedarray(arr,k,mid+1,high)
     else:
+        print "m2"
         if k > arr[mid] and k <=arr[high]:
-            searchinsortedrotatedarray(arr, k,mid+1, high)
+            return searchinsortedrotatedarray(arr, k,mid+1, high)
         else:
-            searchinsortedrotatedarray(arr, k, low, mid - 1)
+            return searchinsortedrotatedarray(arr, k, low, mid - 1)
 
 
 # Driver function
