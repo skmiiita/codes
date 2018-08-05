@@ -456,13 +456,17 @@ def findpivot(arr,low,high):
         #return high
 
     mid = low + (high-low)/2
-
+    print low, mid, high
+    if high < low:
+        return -1
+    if high==low:
+        return low
     if mid > 0  and mid < high and arr[mid-1] > arr[mid] < arr[mid+1]:
         return mid
     elif arr[high] < arr[mid]:
-        findpivot(arr,mid+1,high)
+        return findpivot(arr,mid+1,high)
     else:
-        findpivot(arr,0,mid-1)
+        return findpivot(arr,low,mid-1)
 
 def searchinsortedrotatedarray(arr,k,low,high):
     mid = low + (high-low)/2
@@ -484,12 +488,33 @@ def searchinsortedrotatedarray(arr,k,low,high):
         else:
             return searchinsortedrotatedarray(arr, k, low, mid - 1)
 
+def findsumpairsortedrotated(arr,k,low,high):
+    return
 
+
+def findPivotg(arr, low, high):
+    # base cases
+    if high < low:
+        return -1
+    if high == low:
+        return low
+
+    # low + (high - low)/2;
+    mid = int((low + high) / 2)
+
+    if mid < high and arr[mid] > arr[mid + 1]:
+        return mid
+    if mid > low and arr[mid] < arr[mid - 1]:
+        return (mid - 1)
+    if arr[low] >= arr[mid]:
+        return findPivotg(arr, low, mid - 1)
+    return findPivotg(arr, mid + 1, high)
 # Driver function
 if __name__ == '__main__':
     a = [100, 180, 260, 310, 40, 535, 695]
     b = [100,90,80,70,100,120]
     c = [100,90,80,60,50,40]
+    d = [5,4,3,2,1]
     arr = [5,6,7,8,9,10,1,2,3]
-    print searchinsortedrotatedarray(arr,3,0,8)
+    print findpivot(d,0,4)
 
