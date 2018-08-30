@@ -37,3 +37,19 @@ print counter
 arr = sorted( arr, key=lambda x: (counter[x], x), reverse=True )
 
 print ord('b')-ord('a')
+
+d = {'Bill': (4,2), 'Alex' : (4,0), 'Bob' : (3,4), "Charles": (7,5)}
+sorted(d, key=lambda k: (d[k][1], d[k][0]))
+print d
+
+import heapq
+
+# initializing list
+li = ff = {3:10,1:2,4:2,5:1,2:2}
+li = li.items()
+print li
+# using heapify to convert list into heap
+heapq.heapify(li, key= lambda k:(li[0],))
+
+# printing created heap
+print li
